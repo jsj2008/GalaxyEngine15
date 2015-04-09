@@ -16,6 +16,8 @@
     <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\math_3d.h" />
     <ClInclude Include="include\VideoManager.h" />
+    <ClInclude Include="include\video_includes.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameMain.cpp" />

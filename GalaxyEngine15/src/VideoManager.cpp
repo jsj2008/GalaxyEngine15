@@ -1,5 +1,4 @@
 #include "..\include\VideoManager.h"
-#include "..\include\VideoManager.h"
 #include "..\include\math_3d.h"
 #include "..\include\logger.h"
 
