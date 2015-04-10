@@ -1,5 +1,4 @@
 #include "..\include\GameMain.h"
-#include "..\include\logger.h"
 
 GameMain::GameMain()
 {
@@ -35,6 +34,9 @@ bool GameMain::LoadGame()
 
 	// Set some video settings
 	video.DepthTesting(true);
+
+	// Testing function
+	SetUpTestCameraAndMaterial();
 
 	return true;
 }
@@ -74,8 +76,44 @@ bool GameMain::Run()
 		// Quit if ESC is pressed
 		if (glfwGetKey(video.GetWindow(), GLFW_KEY_ESCAPE))
 			gameRunning = false;
+
+
+		// Draw to the screen
+		video.OpenFrame();
+			doTestDraw();
+		video.CloseFrame();
 	}
 
 	// Everything went ok
 	return true;
+}
+
+void GameMain::doTestDraw()
+{
+	// Draw in 2D
+	testCam.Ortho(true);
+
+	// Set up the camera angle
+	testQuad.SetMatrix(testCam.VPMatrix());
+
+	// Set up test quads
+	testQuad.Draw(100,100);
+}
+
+void GameMain::SetUpTestCameraAndMaterial()
+{
+	// 2D camera setup
+	int x, y;
+	video.GetWindowDims(x, y);
+
+	testCam = GameCamera();
+	testCam.setFOV(45.0f);
+	testCam.setAspectRatio(x / (float)y);
+	testCam.setZPlanes(.1f, 1000.0f);
+	testCam.SetScreen((float)x, (float)y);
+	testCam.setOrthoMode(OM_SCREEN);
+
+	// Make material
+	testMat = Material(new ShaderPair("quadShader.vert", "quadShader.frag"), "..\\res\\wood_floor.png");
+	testQuad = TextureQuad(100, 100, testMat);
 }

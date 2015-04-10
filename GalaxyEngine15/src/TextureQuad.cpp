@@ -1,25 +1,12 @@
 #include "..\include\TextureQuad.h"
 
-
-TextureQuad::TextureQuad()
+TextureQuad::TextureQuad(float w, float h, Material mat, bool resize, bool repeat)
 {
-	height = 0;
-	width = 0;
-}
-
-TextureQuad::TextureQuad(float w, float h)
-{
-	height = h;
-	width = w;
-}
-
-TextureQuad::TextureQuad(float w, float h, const char* fn, bool resize, bool repeat)
-{
-	LoadTexture(fn, repeat);
-
 	m_repeat = repeat;
+	shader = mat.GetShader();
+	textureObject = mat.GetTexture();
 
-	if(resize)
+	if (resize)
 	{
 		height = textureObject->originalHeight();
 		width = textureObject->originalWidth();
@@ -31,17 +18,25 @@ TextureQuad::TextureQuad(float w, float h, const char* fn, bool resize, bool rep
 
 	m_texture = textureObject->object();
 
+	Init(mat);
+
+}
+
+TextureQuad::TextureQuad(void)
+{
+
 }
 
 TextureQuad::~TextureQuad(void)
 {
 }
 
-void TextureQuad::Init()
+void TextureQuad::Init(Material mat)
 {
 	// Make shaders
-	shader = new ShaderPair();
-	shader->Init("quadShader.vert", "quadShader.frag");
+	shader = mat.GetShader();
+	if(!shader->IsReady())
+		shader->Init();
 
 	glGenBuffers(1, &m_vbo);
 	glGenVertexArrays(1, &m_vao);
@@ -52,33 +47,34 @@ void TextureQuad::Init()
 	// bind the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-	float uvMaxH= 1.0f;
-	float uvMaxW= 1.0f;
+	float uvMaxH = 1.0f;
+	float uvMaxW = 1.0f;
 
-	if(m_repeat)
+	if (m_repeat)
 	{
 		uvMaxH = uvMaxW = /*screenwidth*/800 / textureObject->originalWidth();
 	}
 
 	// Set to full screen
-	if(height == 0 && width == 0)
+	if (height == 0 && width == 0)
 	{
 		// Quad vertices
 		GLfloat qdata[] = {
-			 0.0f, 0.0f, 0.0f, 0.0f,   0.0f, // Top left
-			 1.0f, 0.0f, 0.0f, uvMaxW, 0.0f, // Top right
-			 1.0f, 1.0f, 0.0f, uvMaxW, uvMaxH, // Bottom right
-			 0.0f, 1.0f, 0.0f, 0.0f,   uvMaxH  // Bottom left
+			0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Top left
+			1.0f, 0.0f, 0.0f, uvMaxW, 0.0f, // Top right
+			1.0f, 1.0f, 0.0f, uvMaxW, uvMaxH, // Bottom right
+			0.0f, 1.0f, 0.0f, 0.0f, uvMaxH  // Bottom left
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof(qdata), qdata, GL_STATIC_DRAW);
-	}else // probably ortho drawing
+	}
+	else // probably ortho drawing
 	{
 		// Quad vertices
 		GLfloat qdata[] = {
-			0.0f,  0.0f,   0.0f, 0.0f, 0.0f, // Top left
-			width, 0.0f,   0.0f, uvMaxW, 0.0f, // Top right
+			0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Top left
+			width, 0.0f, 0.0f, uvMaxW, 0.0f, // Top right
 			width, height, 0.0f, uvMaxW, uvMaxH, // Bottom right
-			0.0f,  height, 0.0f, 0.0f, uvMaxH  // Bottom left
+			0.0f, height, 0.0f, 0.0f, uvMaxH  // Bottom left
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(qdata), qdata, GL_STATIC_DRAW);
@@ -86,11 +82,11 @@ void TextureQuad::Init()
 
 	// connect the xyz coords
 	glEnableVertexAttribArray(shader->GetAttribLocation("vertex"));
-	glVertexAttribPointer(shader->GetAttribLocation("vertex"), 3, GL_FLOAT, GL_FALSE, 5*sizeof(GLfloat), 0);
+	glVertexAttribPointer(shader->GetAttribLocation("vertex"), 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
 
 	// connect the uv coords to the tex coords
 	glEnableVertexAttribArray(shader->GetAttribLocation("uv"));
-	glVertexAttribPointer(shader->GetAttribLocation("uv"), 2, GL_FLOAT, GL_TRUE, 5*sizeof(GLfloat), (void*)(3*sizeof(GLfloat)));
+	glVertexAttribPointer(shader->GetAttribLocation("uv"), 2, GL_FLOAT, GL_TRUE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 
 	// unbind the VAO
 	glBindVertexArray(0);
@@ -100,30 +96,6 @@ void TextureQuad::Init()
 void TextureQuad::SetTexture(GLuint texture)
 {
 	m_texture = texture;
-}
-
-void TextureQuad::LoadTexture(const char* fn, bool repeat)
-{
-	// Load the texture object
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile(fn);
-	bmp.flipVertically();
-
-	if(repeat)
-		textureObject = new tdogl::Texture(bmp, GL_LINEAR, GL_REPEAT);
-	else
-		textureObject = new tdogl::Texture(bmp);
-}
-
-void TextureQuad::LoadBump(const char* fn, bool repeat)
-{
-	// Load the texture object
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile(fn);
-	bmp.flipVertically();
-
-	if(repeat)
-		textureObject = new tdogl::Texture(bmp, GL_LINEAR, GL_REPEAT);
-	else
-		textureObject = new tdogl::Texture(bmp);
 }
 
 void TextureQuad::Draw()

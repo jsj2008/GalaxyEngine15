@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bitmap.h" />
+    <ClInclude Include="include\GameCamera.h" />
     <ClInclude Include="include\GUI_Interactable.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\GUI_Base.h" />
@@ -23,11 +24,14 @@
     <ClInclude Include="include\video_includes.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\ShaderPair.h" />
+    <ClInclude Include="include\Material.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\TextureQuad.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameCamera.cpp" />
+    <ClCompile Include="src\Material.cpp" />
     <ClCompile Include="src\Bitmap.cpp" />
     <ClCompile Include="src\ShaderPair.cpp" />
     <ClCompile Include="src\GUI_Interactable.cpp" />

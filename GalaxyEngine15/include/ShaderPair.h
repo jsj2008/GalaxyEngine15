@@ -18,11 +18,12 @@ struct ShaderVaribale
 class ShaderPair
 {
 public:
-	ShaderPair(void);
 	ShaderPair(std::string vs, std::string fs);
 	~ShaderPair(void);
+	
+	bool IsReady(){ return ready; }
 
-	bool Init(std::string vs, std::string fs);
+	bool Init();
 
 	void Enable();
 	void Disable();
@@ -49,6 +50,9 @@ public:
 
 private:
 
+	bool Init(std::string vs, std::string fs);
+
+	std::string vertexShaderDir, fragmentShaderDir;
 	std::string shaderDir;
 
 	GLuint scaleLocation;

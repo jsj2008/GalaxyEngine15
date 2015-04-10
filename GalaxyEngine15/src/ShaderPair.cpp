@@ -1,17 +1,13 @@
 #include "..\include\ShaderPair.h"
 #include "..\include\logger.h"
 
-ShaderPair::ShaderPair(void) : ready(false), shaderDir("../res/shaders/")
-{
-}
 
-ShaderPair::ShaderPair(std::string vs, std::string fs) : ready(false), shaderDir("../res/shaders/")
-{
-	Init(vs, fs);
-}
+ShaderPair::ShaderPair(std::string vs, std::string fs) : ready(false), shaderDir("../res/shaders/"){ vertexShaderDir = vs; fragmentShaderDir = fs; }
+ShaderPair::~ShaderPair(void){}
 
-ShaderPair::~ShaderPair(void)
+bool ShaderPair::Init()
 {
+	return Init(vertexShaderDir, fragmentShaderDir);
 }
 
 bool ShaderPair::Init(std::string vs, std::string fs)
