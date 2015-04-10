@@ -11,20 +11,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Bitmap.h" />
+    <ClInclude Include="include\GUI_Interactable.h" />
+    <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\GUI_Base.h" />
     <ClInclude Include="include\GameMain.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\math_3d.h" />
     <ClInclude Include="include\VideoManager.h" />
     <ClInclude Include="include\video_includes.h" />
+    <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\ShaderPair.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\TextureQuad.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bitmap.cpp" />
+    <ClCompile Include="src\ShaderPair.cpp" />
+    <ClCompile Include="src\GUI_Interactable.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
+    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\GUI_Base.cpp" />
     <ClCompile Include="src\GameMain.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\logger.cpp" />
     <ClCompile Include="src\VideoManager.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\TextureQuad.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8853FB31-1358-42D9-9E91-3625C82BAD29}</ProjectGuid>
@@ -63,6 +79,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
