@@ -18,6 +18,9 @@ public:
 	void UpdateMousePosition(double x, double y);
 
 private:
+	// The window that this handler is attached to
+	GLFWwindow* mainWindow;
+
 	std::vector<GUI_Interactable*> guiInteractables;
 	Vector2f mousePosition;
 };

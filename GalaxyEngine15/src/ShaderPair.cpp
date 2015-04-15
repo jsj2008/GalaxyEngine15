@@ -3,6 +3,13 @@
 
 
 ShaderPair::ShaderPair(std::string vs, std::string fs) : ready(false), shaderDir("../res/shaders/"){ vertexShaderDir = vs; fragmentShaderDir = fs; }
+
+ShaderPair::ShaderPair(std::string shaderName) : ready(false), shaderDir("../res/shaders/")
+{
+	vertexShaderDir = shaderName+".vert"; 
+	fragmentShaderDir = shaderName+".frag";
+}
+
 ShaderPair::~ShaderPair(void){}
 
 bool ShaderPair::Init()

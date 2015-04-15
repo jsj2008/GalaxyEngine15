@@ -1,6 +1,7 @@
 #pragma once
 #include "ShaderPair.h"
 #include "Texture.h"
+#include "math_3d.h"
 
 /*
 Material
@@ -29,9 +30,17 @@ public:
 
 	bool IsBuilt();
 
+	// Texture settings
+	void SetRepeat(bool r);
+
+	bool isRepeating();
+
+	Vector2f GetTextureDimentions();
+
 private:
 
-	bool built;
+	bool built, textureRepeat;
+	float textureWidth, textureHeight;
 
 	// Materials are made up of a texture and a shader
 	// ----------------------------------------------	

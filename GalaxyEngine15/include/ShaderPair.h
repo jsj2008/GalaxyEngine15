@@ -18,6 +18,7 @@ struct ShaderVaribale
 class ShaderPair
 {
 public:
+	ShaderPair(std::string shaderName);
 	ShaderPair(std::string vs, std::string fs);
 	~ShaderPair(void);
 	

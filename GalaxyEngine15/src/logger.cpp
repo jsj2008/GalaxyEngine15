@@ -28,6 +28,7 @@ void logger::logMessage(const char* message, ...)
 
 	va_start (argptr, message);
 	vfprintf (file, message, argptr);
+	vprintf(message, argptr);
 	va_end (argptr);
 
 	fclose (file);

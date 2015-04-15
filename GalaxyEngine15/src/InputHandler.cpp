@@ -18,7 +18,7 @@ void InputHandler::UpdateMousePosition(double x, double y)
 
 bool InputHandler::DoTick()
 {
-	// Check what GUI element is under the mouse right now
+	// Handle keyboard
 	
 	return true;
 }

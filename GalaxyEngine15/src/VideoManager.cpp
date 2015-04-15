@@ -1,6 +1,7 @@
 #include "..\include\VideoManager.h"
 #include "..\include\math_3d.h"
 #include "..\include\logger.h"
+#include "..\include\GlobalCustomVariables.h"
 
 #define DEBUG_PRINT_VIDEO_VERSION
 
@@ -89,6 +90,7 @@ bool VideoManager::CreateAndShowWindow(char* title, int x, int y)
 	{
 		windowWidth = x;
 		windowHeight = y;
+		GlobalCustomVariables::SetScreenDims(x, y);
 
 		glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
 		//glfwWindowHint(GLFW_DECORATED,0);
@@ -127,6 +129,7 @@ bool VideoManager::CreateAndShowWindow(char* title, int x, int y)
 
 void VideoManager::LoadVideoAssets()
 {
+
 }
 
 void VideoManager::GetWindowDims(int& width, int& height)

@@ -77,7 +77,6 @@ bool GameMain::Run()
 		if (glfwGetKey(video.GetWindow(), GLFW_KEY_ESCAPE))
 			gameRunning = false;
 
-
 		// Draw to the screen
 		video.OpenFrame();
 			doTestDraw();
@@ -97,7 +96,7 @@ void GameMain::doTestDraw()
 	testQuad.SetMatrix(testCam.VPMatrix());
 
 	// Set up test quads
-	testQuad.Draw(100,100);
+	testQuad.Draw_f(.5, .5);
 }
 
 void GameMain::SetUpTestCameraAndMaterial()
@@ -114,6 +113,10 @@ void GameMain::SetUpTestCameraAndMaterial()
 	testCam.setOrthoMode(OM_SCREEN);
 
 	// Make material
-	testMat = Material(new ShaderPair("quadShader.vert", "quadShader.frag"), "..\\res\\wood_floor.png");
-	testQuad = TextureQuad(100, 100, testMat);
+	testMat = Material(new ShaderPair("quadShader"), "..\\res\\tex1.png");	
+
+	// Make quad
+	testQuad = TextureQuad(200, 500, &testMat);
+	testMat.SetRepeat(true);
+	testQuad.SetOrigin(100, 250);
 }

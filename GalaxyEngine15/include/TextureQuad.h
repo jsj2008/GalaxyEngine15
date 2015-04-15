@@ -1,11 +1,12 @@
 #pragma once
 #include "Material.h"
+#include "logger.h"
 
 class TextureQuad
 {
 public:
 	TextureQuad(void);
-	TextureQuad(float h, float w, Material mat, bool resize = false, bool repeat= false);
+	TextureQuad(float h, float w, Material* mat);
 	~TextureQuad(void);
 
 	
@@ -13,20 +14,23 @@ public:
 	void SetTexture(GLuint texture);
 	
 	void Draw();
+	void Draw_f(float x, float y);
 	void Draw(float x, float y);
 
+	void SetMaterial(Material* newMaterial);
+
+	void SetOrigin(float x, float y);
+
 private:
-	bool  m_repeat;
-	float width, height;
+	float width, height, originX, originY;
 
 	GLuint m_vao, m_vbo, m_bump, m_texture;
 
 	glm::mat4 matrix;
 
-	ShaderPair* shader;
-	tdogl::Texture* textureObject;
+	Material* mat;
 
-	void Init(Material mat);
+	bool Init();
 
 	void LoadTexture(const char* fn, bool repeat);
 	void LoadBump(const char* fn, bool repeat);
