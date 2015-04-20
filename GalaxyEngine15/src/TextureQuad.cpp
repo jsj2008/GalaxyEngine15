@@ -3,6 +3,7 @@
 
 TextureQuad::TextureQuad(float w, float h, Material* _mat)
 {
+	LogError("TextureQuad(%f, %f, 0x%p) - 0x%p\n", w, h, _mat, this);
 	// Set dimensions
 	width = w; height = h;
 
@@ -13,7 +14,7 @@ TextureQuad::TextureQuad(float w, float h, Material* _mat)
 
 TextureQuad::TextureQuad(void)
 {
-
+	LogError("TextureQuad(void) 0x%p!\n", this);
 }
 
 TextureQuad::~TextureQuad(void)
@@ -121,7 +122,7 @@ void TextureQuad::Draw(float x, float y)
 {	
 	mat->GetShader()->Enable();
 
-	mat->GetShader()->SetUniformVar("mvp", matrix*glm::translate(glm::mat4(), glm::vec3(x-originX, y-originY, 0)));
+	mat->GetShader()->SetUniformVar("mvp", matrix*glm::translate(glm::mat4(), glm::vec3(x-originX, (y-originY), 0)));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mat->GetTexture()->object());
@@ -152,6 +153,16 @@ void TextureQuad::SetMaterial(Material* newMaterial)
 void TextureQuad::SetOrigin(float x, float y)
 {
 	originX = x; originY = height-y;
+}
+
+
+// A float value of 0-1
+void TextureQuad::SetOrigin_f(float x, float y)
+{
+	x = width*x;
+	y = height*y;
+
+	SetOrigin(x, y);
 }
 
 void TextureQuad::SetMatrix(glm::mat4 mvp)

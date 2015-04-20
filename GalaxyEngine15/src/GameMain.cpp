@@ -53,7 +53,7 @@ bool GameMain::Run()
 {
 	bool gameRunning = true;
 	double previous = glfwGetTime();
-
+	
 	while (gameRunning)
 	{
 		//	Delta time variables
@@ -77,6 +77,8 @@ bool GameMain::Run()
 		if (glfwGetKey(video.GetWindow(), GLFW_KEY_ESCAPE))
 			gameRunning = false;
 
+		testButton.Update();
+
 		// Draw to the screen
 		video.OpenFrame();
 			doTestDraw();
@@ -89,34 +91,24 @@ bool GameMain::Run()
 
 void GameMain::doTestDraw()
 {
-	// Draw in 2D
-	testCam.Ortho(true);
+	// Update the global view matrix
+	GlobalCustomVariables::SetViewMatrix(testCam.VPMatrix());
 
-	// Set up the camera angle
-	testQuad.SetMatrix(testCam.VPMatrix());
-
-	// Set up test quads
-	testQuad.Draw_f(.5, .5);
+	testButton.Draw();
 }
 
 void GameMain::SetUpTestCameraAndMaterial()
 {
 	// 2D camera setup
-	int x, y;
-	video.GetWindowDims(x, y);
-
 	testCam = GameCamera();
 	testCam.setFOV(45.0f);
-	testCam.setAspectRatio(x / (float)y);
+	testCam.setAspectRatio(ScreenWidth / (float)ScreenHeight);
 	testCam.setZPlanes(.1f, 1000.0f);
-	testCam.SetScreen((float)x, (float)y);
+	testCam.SetScreen((float)ScreenWidth, (float)ScreenHeight);
 	testCam.setOrthoMode(OM_SCREEN);
+	testCam.Ortho(true);
 
-	// Make material
-	testMat = Material(new ShaderPair("quadShader"), "..\\res\\tex1.png");	
-
-	// Make quad
-	testQuad = TextureQuad(200, 500, &testMat);
-	testMat.SetRepeat(true);
-	testQuad.SetOrigin(100, 250);
+	testButton.Init();
+	testButton.SetOriginF(.5, .5);
+	testButton.SetPositionF(.66f, .33f);
 }

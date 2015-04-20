@@ -3,8 +3,9 @@
 #include "VideoManager.h"
 #include "InputHandler.h"
 #include "logger.h"
-#include "TextureQuad.h"
 #include "GameCamera.h"
+#include "GlobalCustomVariables.h"
+#include "Button.h"
 
 /* 
 GameMain.h
@@ -33,6 +34,6 @@ private:
 //  ------------------
 	GameCamera  testCam;
 	Material    testMat;
-	TextureQuad testQuad;
+	Button		testButton;
 };
 

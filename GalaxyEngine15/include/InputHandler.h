@@ -3,10 +3,11 @@
 #include "video_includes.h"
 #include "logger.h"
 
-#include "Button.h"
+#include "GUI_Interactable.h"
 
 #include <GLFW/glfw3.h>
 #include <vector>
+#include "GlobalCustomVariables.h"
 
 class InputHandler
 {

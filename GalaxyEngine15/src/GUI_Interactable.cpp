@@ -10,11 +10,6 @@ GUI_Interactable::~GUI_Interactable()
 {
 }
 
-bool GUI_Interactable::Draw()
-{
-	return false;
-}
-
 bool GUI_Interactable::IsMouseOver(float x, float y)
 {
 	// 0------ X+    Window scheme used for this calculation
@@ -26,4 +21,9 @@ bool GUI_Interactable::IsMouseOver(float x, float y)
 	if (y > top + height || y < top)  return false;
 
 	return true;
+}
+
+bool GUI_Interactable::IsMouseOver(Vector2f mpos)
+{
+	return IsMouseOver(mpos.x, mpos.y);
 }

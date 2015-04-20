@@ -14,6 +14,7 @@ InputHandler::~InputHandler()
 void InputHandler::UpdateMousePosition(double x, double y)
 {
 	mousePosition = Vector2f((float)x, (float)y);
+	GlobalCustomVariables::SetCursorPos(x, y);
 }
 
 bool InputHandler::DoTick()

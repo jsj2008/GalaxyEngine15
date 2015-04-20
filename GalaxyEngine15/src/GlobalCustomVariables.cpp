@@ -2,6 +2,9 @@
 
 int GlobalCustomVariables::sh;
 int GlobalCustomVariables::sw;
+double GlobalCustomVariables::mouseX;
+double GlobalCustomVariables::mouseY;
+glm::mat4 GlobalCustomVariables::mat;
 
 int GlobalCustomVariables::GetScreenWidth()
 {

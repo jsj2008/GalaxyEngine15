@@ -1,6 +1,6 @@
 #pragma once
 #include "math_3d.h"
-#include <GLFW\glfw3.h>
+#include "TextureQuad.h"
 
 class GUI_Base
 {
@@ -12,8 +12,10 @@ public:
 
 	bool  visible;			// Visibility of the element
 
-	void SetOrigin(Vector2f new_position);
-	void SetPosition(Vector2f new_origin);
+	void UpdateDims();
+	void SetSize(float width, float height);
+	void SetOrigin(Vector2f new_origin);
+	void SetPosition(Vector2f new_position);
 
 protected:
 	float height, width,	// Height and width of the element
@@ -21,6 +23,9 @@ protected:
 
 	Vector2f origin;		// Origin of the UI element
 	Vector2f position;		// Position around the origin
+
+	TextureQuad quad;		// Visual objects
+	Material mat, mat_hover;// materials
 
 };
 

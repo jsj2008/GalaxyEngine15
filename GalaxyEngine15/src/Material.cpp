@@ -13,7 +13,7 @@ Material::Material(ShaderPair* s, const char* tex) :textureRepeat(false), built(
 
 Material::Material()
 {
-
+	built = false;
 }
 
 Material::~Material()

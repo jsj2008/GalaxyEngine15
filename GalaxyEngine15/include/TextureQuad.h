@@ -20,6 +20,7 @@ public:
 	void SetMaterial(Material* newMaterial);
 
 	void SetOrigin(float x, float y);
+	void SetOrigin_f(float x, float y);
 
 private:
 	float width, height, originX, originY;
