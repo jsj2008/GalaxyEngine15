@@ -12,7 +12,7 @@ public:
 	~Button();
 
 	bool Draw();
-	bool Init();
+	bool Init(float width, float height);
 
 	bool Update();
 

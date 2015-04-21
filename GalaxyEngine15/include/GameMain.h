@@ -5,6 +5,7 @@
 #include "logger.h"
 #include "GameCamera.h"
 #include "GlobalCustomVariables.h"
+#include "ShaderManager.h"
 #include "Button.h"
 
 /* 

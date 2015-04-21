@@ -3,7 +3,9 @@
 Material::Material(ShaderPair* s, const char* tex) :textureRepeat(false), built(false)
 {
 	shader = s;			// Set shader object
-	s->Init();			// and initialize it
+
+	if (!shader->IsReady())
+		shader->Init();			// and initialize it
 
 	textureFileName = tex;
 	LoadTexture(tex);	// Create the texture object

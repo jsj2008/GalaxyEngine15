@@ -1,6 +1,7 @@
 #pragma once
 #include "math_3d.h"
 #include "TextureQuad.h"
+#include "ShaderManager.h"
 
 class GUI_Base
 {

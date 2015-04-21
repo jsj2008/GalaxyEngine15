@@ -8,18 +8,18 @@ Button::~Button()
 {
 }
 
-bool Button::Init()
+bool Button::Init(float _width, float _height)
 {
 	// Make material
-	mat = Material(new ShaderPair("quadShader"), "..\\res\\black.png");
+	mat = Material(ShaderManager::GetShaderInstance(SHADER_UV_TEXTURE), "..\\res\\black.png");
 
-	hover_mat = Material(new ShaderPair("quadShader"), "..\\res\\white.png");
+	hover_mat = Material(ShaderManager::GetShaderInstance(SHADER_UV_TEXTURE), "..\\res\\white.png");
 
 	// Make quad
-	quad = TextureQuad(130, 75, &mat);
+	quad = TextureQuad(_width, _height, &mat);
 	mat.SetRepeat(true);
 
-	SetSize(130, 75);
+	SetSize(_width, _height);
 
 	return true;
 }

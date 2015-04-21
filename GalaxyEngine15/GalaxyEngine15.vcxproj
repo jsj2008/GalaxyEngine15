@@ -26,11 +26,13 @@
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\ShaderPair.h" />
     <ClInclude Include="include\Material.h" />
+    <ClInclude Include="include\ShaderManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\TextureQuad.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ShaderManager.cpp" />
     <ClCompile Include="src\GlobalCustomVariables.cpp" />
     <ClCompile Include="src\GameCamera.cpp" />
     <ClCompile Include="src\Material.cpp" />

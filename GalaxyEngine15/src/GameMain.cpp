@@ -99,6 +99,10 @@ void GameMain::doTestDraw()
 
 void GameMain::SetUpTestCameraAndMaterial()
 {
+	ShaderManager::AddShader("quadShader", SHADER_UV_TEXTURE);
+
+	ShaderManager::BuildShaders();
+
 	// 2D camera setup
 	testCam = GameCamera();
 	testCam.setFOV(45.0f);
@@ -108,7 +112,7 @@ void GameMain::SetUpTestCameraAndMaterial()
 	testCam.setOrthoMode(OM_SCREEN);
 	testCam.Ortho(true);
 
-	testButton.Init();
+	testButton.Init(300, 30);
 	testButton.SetOriginF(.5, .5);
 	testButton.SetPositionF(.66f, .33f);
 }
