@@ -24,7 +24,8 @@ Material::~Material()
 
 bool Material::BuildMaterial()
 {
-	shader->Init();
+	if (!shader->IsReady())
+		shader->Init();
 
 	return built = true;
 }
